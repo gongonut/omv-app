@@ -1,0 +1,23 @@
+<div class="flex flex-col h-screen bg-slate-100">
+    <app-nav-bar [buttons]="'100000'"></app-nav-bar>
+
+    <div class="overflow-auto bg-white p-2">
+        <app-dynamic-form [jsonFormData]="settings" [values]="sharedvar.general"
+            (result)="onGetData($event)"></app-dynamic-form>
+        <div class="h-14 flex justify-between items-center bg-white border-y border-gray-300 text-lg">
+            <div class="ml-2">
+            Editar: Condiciones comerciales
+        </div>
+            <span class="block border my-2 mr-2 p-2 hover:border-sky-900 hover:text-sky-900"
+            (click)="addCondition()">
+                <mat-icon>add</mat-icon>
+            </span>
+        </div>
+        <div class="mb-2"></div>
+        <div *ngFor="let cond_quote of quote_cond_list">
+            <app-cond-quote [condition]="cond_quote" [edit]="true" (status)="onStatus($event)"></app-cond-quote>
+            <hr>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="flex flex-col h-full">
+    <app-nav-bar [buttons]="'100001'" (onClicked)="getClicked($event)"></app-nav-bar>
+    <span id="spanTrigger" #editControlTrigger="matMenuTrigger" [matMenuTriggerFor]="controlEdit"></span>
+    <div *ngIf="viewNote" class="bg-gray-100 h-80">
+        <img class="w-48 h-48 border border-gray-600 m-2 py-1 px-2 rounded shadow-sm" [src]="getComImage()"
+            *ngIf="sharedvar.selQuote.crome_image">
+        <div class="border border-gray-300 bg-white h-24 m-2 overflow-auto">
+            <div class="m-2">{{sharedvar.selQuote.client_observations}}</div>
+        </div>
+    </div>
+    <div class="flex-1 px-2 overflow-auto">
+        <div id="printsection" #printcontent>
+            <app-qoute-preview (onChange)="onCotizaWishChange($event)" [edit]="edit"></app-qoute-preview>
+        </div>
+    </div>
+</div>
+
+<mat-menu #controlEdit="matMenu">
+    <h2>&nbsp;Cotización</h2>
+    <button *ngIf="sharedvar.selQuote.status !== 2" mat-menu-item (click)="setQuote(2)">
+        Tomar
+        <mat-icon color="primary">done</mat-icon>
+    </button>
+    <button *ngIf="sharedvar.selQuote.status !== 1" mat-menu-item (click)="setQuote(1)">
+        Liberar
+        <mat-icon color="primary">close</mat-icon>
+    </button>
+    <button mat-menu-item (click)="onDuplicate()">
+        Duplicar
+        <mat-icon color="primary">content_copy</mat-icon>
+    </button>
+    <button mat-menu-item (click)="setDelete()">
+        <mat-icon color="warn">close</mat-icon>
+        Eliminar
+    </button>
+    <button mat-menu-item (click)="setSend()">
+        Enviar
+        <mat-icon color="warn">send</mat-icon>
+    </button>
+    
+    <hr>
+    <h2 class="mt-2">&nbsp;Acción</h2>
+    <button mat-menu-item (click)="onEditState(true)">
+        Editar
+        <mat-icon color="primary">edit</mat-icon>
+    </button>
+    <button mat-menu-item (click)="onEditState(false)">
+        Vista previa
+        <mat-icon color="primary">preview</mat-icon>
+    </button>
+    <!--
+    <button mat-menu-item (click)="onReSendEmail()">
+        Reenviar correo
+        <mat-icon color="warn">mail_outline</mat-icon>
+    </button>
+-->
+    <button mat-menu-item (click)="printAsPdf()">
+        <mat-icon color="primary">print</mat-icon>
+        Impimir
+    </button>
+    <button mat-menu-item (click)="onNote()">
+        <mat-icon color="primary">{{getNoteIcon()}}</mat-icon>
+        {{getNoteText()}}
+    </button>
+</mat-menu>

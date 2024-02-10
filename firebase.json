@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "site": "omv-cli-quote",
+    "public": "dist/quote-cli-01",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}

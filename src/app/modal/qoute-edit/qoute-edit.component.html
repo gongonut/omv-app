@@ -1,0 +1,17 @@
+<div class="flex flex-col h-full">
+    <h1 class="h-16 p-3 text-9xl bg-violet-600 text-white">{{data.title}}</h1>
+    <div class="flex-1 px-3 overflow-auto">
+        <app-detail-long [qitem]="data.value"
+                    (onChange)="onQitemChange($event)"></app-detail-long>
+    </div>
+
+    <div class="flex p-3 justify-end border-t border-violet-500">
+        <button mat-stroked-button color="warn" (click)="onDismiss()">
+            <mat-icon>close</mat-icon>
+        </button>
+        &nbsp;
+        <button mat-stroked-button color="primary" (click)="onSave()" cdkFocusInitia>
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
+</div>

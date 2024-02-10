@@ -1,0 +1,26 @@
+<div class="flex flex-col h-screen bg-slate-100">
+    <app-nav-bar [buttons]="'101000'" (onClicked)="getClicked($event)"></app-nav-bar>
+    <span id="spanTrigger" #editControlTrigger="matMenuTrigger" [matMenuTriggerFor]="controlEdit"></span>
+    <div class="overflow-auto bg-white">
+        <div *ngFor="let user of usersList">
+            <div class="h-10 px-2 flex items-center bg-gray-50 mt-1">
+                <div class="w-52 font-medium">
+                    {{user.name}}
+                </div>
+                <div class="ml-3 flex-1 text-sky-700">
+                    {{user.email}}
+                </div>
+                <span class="text-sky-700">
+                    <mat-icon (click)="editUser(user)">edit</mat-icon>
+                    <mat-icon (click)="onDelete(user)">delete</mat-icon>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <mat-menu #controlEdit="matMenu">
+        <button mat-menu-item>
+            Crear Usuario Maestro
+        </button>
+    </mat-menu>

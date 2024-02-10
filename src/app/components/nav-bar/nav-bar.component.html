@@ -1,0 +1,61 @@
+<div class="sticky top-0 z-1000 flex items-center align-middle h-14 px-3 bg-white border-b border-gray-300">
+    <div class="grow">
+        <div class="flex items-center align-middle text-ellipsis overflow-hidden">
+            <div *ngIf="nvg.routePrevList.length <= 1">
+                <img class="h-14 object-fill" [src]="'../assets/images/default-logo.png'" alt="omvpublicidad" />
+            </div>
+            <div *ngIf="nvg.routePrevList.length <= 1" class="w-10"></div>
+            <button *ngIf="nvg.routePrevList.length > 1" class="text-lg before:content-['<']  text-sky-600" (click)="onBack()">
+                &nbsp;Regresar -- {{getNavTitle()}}
+            </button>
+            
+        </div>
+    </div>
+    <div class="ml-6 flex items-center border-b bg-gray-50">
+        <div class="flex items-center" *ngIf="getBtnVisible(0)">
+            <span class="block border-b-4 p-3 hover:border-sky-900 hover:text-sky-900">
+                <mat-icon class="mat-18" (click)="onClick($event, 0)">print</mat-icon>
+            </span>
+        </div>
+        <div class="flex items-center" *ngIf="getBtnVisible(1)">
+            <span class="block border-b-4 p-3 hover:border-sky-900 hover:text-sky-900">
+                <mat-icon class="mat-18" (click)="onClick($event, 1)">tune</mat-icon>
+            </span>
+        </div>
+        <div class="flex items-center" *ngIf="getBtnVisible(2)">
+            <span class="block border-b-4 p-3 hover:border-sky-900 hover:text-sky-900">
+                <mat-icon (click)="onClick($event, 2)">add</mat-icon>
+            </span>
+        </div>
+        <div class="flex items-center" *ngIf="getBtnVisible(3)">
+            <span [ngClass]="getLChat()">
+                <mat-icon (click)="onClick($event, 3)">forum</mat-icon>
+            </span>
+        </div>
+        <div class="flex items-center" *ngIf="getBtnVisible(4, true)" [matMenuTriggerFor]="logmenu">
+            <span class="block border-b-4 p-3 hover:border-sky-900 hover:text-sky-900">
+                <mat-icon>perm_identity</mat-icon>
+            </span>
+        </div>
+        <div class="flex items-center" *ngIf="getBtnVisible(5)">
+            <span class="block border-b-4 p-3 hover:border-sky-900 hover:text-sky-900">
+                <mat-icon (click)="onClick($event, 4)">more_horiz</mat-icon>
+            </span>
+        </div>
+
+    </div>
+
+    <mat-menu #logmenu="matMenu">
+        <div class="px-2">
+        {{user_name}}
+    </div>
+        <hr>
+        <button mat-menu-item [disabled]="false" (click)="onClick($event, 40)" [disabled]="logged">
+          Iniciar sesión
+        </button>
+        <button mat-menu-item (click)="onClick($event, 42)" [disabled]="!logged">
+          Finalizar sesión
+        </button>
+      </mat-menu>
+
+</div>

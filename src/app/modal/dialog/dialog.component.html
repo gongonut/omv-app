@@ -1,0 +1,34 @@
+<div class="flex flex-col h-full">
+    <h1 class="h-16 p-3 text-9xl bg-violet-600 text-white">{{data.title}}</h1>
+    <div class="flex-1 px-3 pt-1 overflow-auto">
+        <app-dynamic-form [jsonFormData]="schema" [values]="data.value" [reset]="reset"
+            (result)="onGetData($event)"></app-dynamic-form>
+        <!-- promera imagen -->
+        <label *ngIf="image1">
+            <img class="w-48 h-48 border border-gray-200 py-1 px-2 rounded shadow-sm" [src]="getImage()"
+                *ngIf="data.image">
+            <div class="w-48 h-48 border border-gray-200 py-1 px-2 rounded shadow-sm" *ngIf="!image1">
+                <span>Imagen pequeña.</span>
+            </div>
+            <input style="display: none" (click)="fileChangeEvent()" accept=".png,.jpg">
+        </label>
+        <label *ngIf="image2">
+            <img class="w-48 h-48 border border-gray-200 py-1 px-2 rounded shadow-sm" [src]="getImage()"
+                *ngIf="data.image">
+            <div class="w-48 h-48 border border-gray-200 py-1 px-2 rounded shadow-sm" *ngIf="!image1">
+                <span>Imagen mediana.</span>
+            </div>
+            <input style="display: none" (click)="fileChangeEvent()" accept=".png,.jpg">
+        </label>
+    </div>
+
+    <div class="flex p-3 justify-end border-t border-violet-500">
+        <button mat-stroked-button color="warn" (click)="onDismiss()">
+            <mat-icon>close</mat-icon>
+        </button>
+        &nbsp;
+        <button mat-stroked-button color="primary" (click)="onSave()" [disabled]="disable" cdkFocusInitial>
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
+</div>

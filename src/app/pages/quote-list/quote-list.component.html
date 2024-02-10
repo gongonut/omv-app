@@ -1,0 +1,154 @@
+<app-nav-bar [buttons]="'100011'" (onClicked)="getClicked($event)"></app-nav-bar>
+<span id="spanTrigger" #editControlTrigger="matMenuTrigger" [matMenuTriggerFor]="controlEdit"></span>
+
+<div class="px-2 flex-col">
+    <div *ngFor="let quoteW of sharedvar.cotizaWishList">
+        <div class="mt-2 h-20 w-full border-b border-sky-700">
+            <div class="flex flex-row align-center">
+                <div class="w-72 font-medium">{{quoteW.client_name}}</div>
+                <div class="w-52">
+                    <span>Consecutivo: </span>
+                    <span class="font-medium">{{quoteW.consecutive}}</span>
+                </div>
+
+                <div class="grow">
+                    <span>Total: </span>
+                    <span class="font-medium">{{quoteW.total | currency}}</span>
+                </div>
+
+                <div class="ml-1 p-1 flex flex-row items-center text-xs text-sky-500 border border-sky-500 rounded-md"
+                    (click)="onDetail(quoteW)">
+                    Estado: <span>{{status2str(quoteW.status)}}</span>
+                    <mat-icon>chevron_right</mat-icon>
+                </div>
+            </div>
+            <div class="pl-2 text-xs">
+                <div>
+                    Teléfono:
+                    <span class="pl-2 font-thin">{{quoteW.client_phone}}</span>
+                </div>
+                <div>
+                    Email:
+                    <span class="pl-7 font-thin">{{quoteW.client_email}}</span>
+                </div>
+            </div>
+        </div>
+        <!--
+        <input #excelUpload type="file" class="invisible" (change)="onExcelFileSelected($event)" accept=".xlsx" />
+        -->
+        <!--
+        <input #imagesUpload type="file" class="hidden" multiple="true" (change)="fileChangeEvent($event)" accept=".png,.jpg,.gif">
+        -->
+    </div>
+
+    <mat-menu #controlEdit="matMenu">
+        <button *ngIf="getMenuVisible('P')" mat-menu-item [matMenuTriggerFor]="reports">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    tune
+                </span>
+            </mat-icon>
+            Filtro / Informe
+        </button>
+        <hr>
+        <!--
+        <button *ngIf="getMenuVisible('P')" mat-menu-item [matMenuTriggerFor]="products">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    add_shopping_cart
+                </span>
+            </mat-icon>
+            Productos
+        </button>
+        -->
+        <button *ngIf="getMenuVisible('P')" mat-menu-item (click)="onEditList()">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    add_shopping_cart
+                </span>
+            </mat-icon>
+            Productos
+        </button>
+        <button *ngIf="getMenuVisible('C')" mat-menu-item (click)="gotoCondicComer()">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    settings
+                </span>
+            </mat-icon>
+            Configuración
+        </button>
+        <button *ngIf="getMenuVisible('U')" mat-menu-item (click)="onUsers()">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    supervisor_account
+                </span>
+            </mat-icon>
+            Usuarios
+        </button>
+    </mat-menu>
+
+    <mat-menu #reports="matMenu">
+        <button mat-menu-item (click)="onFilter()">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    auto_graph
+                </span>
+            </mat-icon>
+            Estado/Consecutivo...
+        </button>
+        <button mat-menu-item (click)="onFilterDate()">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    auto_graph
+                </span>
+            </mat-icon>
+            Fecha...
+        </button>
+        <hr>
+        <button mat-menu-item (click)="downloadTable2Excel()">
+            <mat-icon color="primary">
+                <span class="material-icons-outlined">
+                    auto_graph
+                </span>
+            </mat-icon>
+            Descargar a Excel
+        </button>
+
+    </mat-menu>
+
+    <mat-menu #products="matMenu">
+        <div class="font-medium">
+            <mat-icon color="primary">cloud_upload</mat-icon>
+            Base remota
+        </div>
+
+        <button class="pl-4" mat-menu-item (click)="onExcel2Dtb($event)">
+            Excel hacia DtBase
+        </button>
+        <label class="label">
+            <input type="file" (change)="fileImagesChangeEvent($event)" required multiple
+                accept=".png,.jpg,.gif,.jpeg" />
+            <span class="pl-4 my-2">Imágenes hacia DtBase</span>&nbsp;&nbsp;
+        </label>
+        <hr>
+        <div class="font-medium">
+            <mat-icon class="mt-1" color="primary">edit</mat-icon>
+            Base local
+        </div>
+        <button mat-menu-item (click)="onDtb2Excel()">
+            Data base hacia Excel
+        </button>
+        <button mat-menu-item (click)="onEditList()">
+            Editar Catálogo
+        </button>
+        <button mat-menu-item (click)="onAllImgs()">
+            Lista de imágenes en la base
+        </button>
+
+
+
+    </mat-menu>
+
+    <input #excelUpload type="file" class="invisible" (change)="onExcelFileSelected($event)" accept=".xlsx" />
+
+</div>

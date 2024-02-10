@@ -1,0 +1,76 @@
+<div class="flex pt-1 h-80 border-t border-sky-700">
+    <img class="pt-2 h-24 w-24" [src]="getImage()" alt="item.descripcion_comercial" />
+    <div class="w-4"></div>
+    <div class="flex grow flex-col">
+        <div class="text-lg font-medium text-sky-700 bg-gray-100">&nbsp;{{qitem.familia}} -
+            {{qitem.descripcion_comercial}}
+            &nbsp;
+            <mat-icon class="pt-1" (click)="changeExpand()">done</mat-icon>
+            &nbsp;
+            <mat-icon class="pt-1 text-red-700" (click)="changeExpand()">delete</mat-icon>
+        </div>
+        <div class="font-light">{{qitem.materiales[0].codigo}} -
+            {{qitem.materiales[0].color_nombre}}</div>
+
+        <div class="mt-2 pl-4 text-sm text-gray-600">
+            <div>
+                <span class="font-medium">Solicitado:&nbsp;</span>{{qitem.itemTag.cantidad}}&nbsp;&nbsp;
+                <span class="font-medium">Existencia:</span>&nbsp;{{getExist() | number}}
+            </div>
+            <div>
+                <span class="font-medium">Precio unitario:&nbsp;</span>{{getPrecio() | currency}}&nbsp;&nbsp;
+                <span class="font-medium">Precio cotiza:&nbsp;</span>$&nbsp;
+                <input class="mt-1 h-8 w-24 text-center rounded-md border border-slate-300" type="number"
+                    [value]="this.qitem.itemTag.precio" (change)="onPrecioCotizaVal($event)" />
+                    &nbsp;
+                <input class="mt-1 h-8 w-12 text-center rounded-md border border-slate-300" type="number"
+                    [value]="qitem.itemTag.p_increment" (change)="onP_Increment($event)" />
+                <mat-icon class="pt-1">percent</mat-icon>
+
+            </div>
+            <div>
+                <span class="font-medium">Descuento:</span>&nbsp;<input
+                    class="mt-1 h-8 w-24 text-center rounded-md border border-slate-300" type="number"
+                    [value]="getDescuento()" (change)="onDescuentoVal($event)" />
+            </div>
+            <div>
+                <span class="font-medium">Sub-total antes de IVA:</span>&nbsp;{{prettl | currency}}
+
+            </div>
+            <div>
+                <span class="font-medium">Total con IVA:</span>&nbsp;{{ttl | currency}}
+                &nbsp;&nbsp;
+                <span class="font-medium">IVA:</span>&nbsp;<input
+                    class="mt-1 h-8 w-10 text-center rounded-md border border-slate-300" type="number"
+                    [value]="this.qitem.itemTag.p_iva" (change)="onPIvaVal($event)" />&nbsp;
+                <mat-icon class="pt-1">percent</mat-icon>
+            </div>
+            <div class="mt-2 font-medium">Notas Adicionales</div>
+
+            <textarea class="mt-1 h-16 w-11/12 p-3 overflow-y-auto border border-gray-200 rounded " rows="4" cols="50"
+                [value]="getNotas()" (change)="onNotasVal($event)">
+                    </textarea>
+        </div>
+    </div>
+</div>
+
+<!--
+<mat-menu #headmenu="matMenu">
+    <button mat-menu-item (click)="percentVal(5)">
+        5 %
+    </button>
+    <button mat-menu-item (click)="percentVal(10)">
+        10 %
+    </button>
+    <button mat-menu-item (click)="percentVal(15)">
+        15 %
+    </button>
+    <button mat-menu-item (click)="percentVal(19)">
+        19 %
+    </button>
+    <button mat-menu-item (click)="percentVal(20)">
+        20 %
+    </button>
+
+</mat-menu>
+-->

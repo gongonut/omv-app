@@ -1,0 +1,100 @@
+<div class="flex flex-col h-full">
+    <h1 class="h-12 p-3 text-2xl bg-violet-600 text-white">{{data.title}}</h1>
+    <div *ngIf="data.viewfilter" class="h-10 w-full flex flex-row items-center border-b border-violet-500">
+        <div *ngIf="multiSelect" class="w-6 ml-2 mt-2">
+            <input type="checkbox" [checked]="chekAll" (change)="onChekAll()" class="w-4 h-4 focus:border-blue-500">
+        </div>
+        <mat-icon class="bg-gray-200 rounded-sm" [matMenuTriggerFor]="selectView">{{getView()}}</mat-icon>
+        <input type="search" class="flex-1 ml-2 h-8 z-20 text-gray-900 outline-none border-b border-gray-200 focus:outline-none focus:outline-none"
+            [(ngModel)]="filtertext" placeholder="Filtrar..." (change)="onViewSelected(false)">
+
+        <!--
+        <mat-form-field style="width:100%;">
+            <mat-label>Filtro</mat-label>
+            <input matInput [(ngModel)]="filtertext">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        -->
+
+    </div>
+
+    <div class="flex-1 overflow-auto mt-2">
+        <div class="flex flex-column" *ngFor="let item of data.valuelst; index as i">
+            <div *ngIf="getViewFilter(item)" class="flex flex-row h-8 ml-2">
+                <input id="itemsel" type="checkbox" [(ngModel)]="item.selected" (change)="onSelected(item)"
+                    class="w-4 h-4 text-violet-500 bg-gray-100 border-gray-300 rounded dark:focus:ring-violet-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="itemsel" class="ml-4 h-4 w-72 text-sm text-gray-900 overflow-hidden">{{item.name}}</label>
+            </div>
+
+        </div>
+    </div>
+    <div class="flex p-3 justify-end border-t border-violet-500">
+        <div class="flex-1" *ngIf="data.viewAdd === true" fxFlex>
+            <button mat-stroked-button color="primary" (click)="onNew()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <!--
+            <button mat-stroked-button color="primary" (click)="onEdit()">
+                <mat-icon>edit</mat-icon>
+            </button>
+            -->
+        </div>
+        
+        <button mat-stroked-button color="warn" (click)="onDismiss()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button mat-stroked-button color="primary" (click)="onSave()" cdkFocusInitia>
+            <mat-icon>done</mat-icon>
+        </button>
+
+    </div>
+
+    <mat-menu #selectView="matMenu">
+        <button mat-menu-item (click)="onViewSelected(true)">
+            <mat-icon>done</mat-icon>
+            Ver seleccionados
+        </button>
+        <button mat-menu-item (click)="onViewSelected(false)">
+            <mat-icon>visibility</mat-icon>
+            Ver Todo
+        </button>
+    </mat-menu>
+
+</div>
+
+<!--
+
+<div style="height: 100%;" fxLayout="column" fxLayoutAlign="start start">
+    <div fxFlex>
+        <h3>{{data.title}}</h3>
+        <p>{{data.description}}</p>
+        <div *ngIf="data.viewfilter" style="width: 100%;">
+            <mat-form-field style="width:100%;">
+                <mat-label>Filtro</mat-label>
+                <input matInput [(ngModel)]="filtertext">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
+        <div *ngFor="let item of valuelst; index as i">
+            <mat-checkbox *ngIf="onFilter(item)" [(ngModel)]="item.selected">{{item.name}}</mat-checkbox>
+            <div fxFlex="5px"></div>
+        </div>
+    </div>
+    <div fxFlex="35px" style="width:100%" fxLayout="row" fxLayoutAlign="end center">
+        <div *ngIf="data.viewAdd" fxFlex>
+            <button mat-stroked-button color="warn" (click)="onNew()">
+                Nuevo&nbsp;
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div fxFlex="130px">
+            <button mat-stroked-button color="warn" (click)="onDismiss()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <button mat-stroked-button color="primary" (click)="onSave()" cdkFocusInitia>
+                <mat-icon>done</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+-->

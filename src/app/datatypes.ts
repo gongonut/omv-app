@@ -196,5 +196,6 @@ export interface General {
     name?: string; // Nombre de la empresa
     site?: string; // página
     phone?: string; // Teléfono
-    address?: string
+    address?: string;
+    notifMails?: string;
 }

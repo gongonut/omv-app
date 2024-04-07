@@ -171,12 +171,17 @@ export class UsersComponent implements OnInit {
     }
     */
 
+    /*
     const shortUserData = {...this.userData};
-    shortUserData.controls = shortUserData.controls?.slice(2);
+    if (shortUserData.controls && shortUserData.controls.length > 2) {
+      shortUserData.controls[2].disabled = true;
+    }
+    */
+    
     const ddta: DialogData = {
       title: 'Editar Usuario',
       value: user,
-      schema: shortUserData,
+      schema: this.userData,
       dgheigth: 460,
       dgwidth: 300
     }

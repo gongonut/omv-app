@@ -56,6 +56,15 @@ export class QuoteDocComponent implements OnInit {
         type: 'number',
         validators: { required: true }
       },
+      {
+        name: 'notifMails',
+        label: 'Correos para notificar (separados por punto y coma ;):',
+        type: 'textarea',
+        totalRows: 2,
+        style: 'w-full',
+        validators: { }
+      },
+      
       /*
       {
         name: 'newUsr',

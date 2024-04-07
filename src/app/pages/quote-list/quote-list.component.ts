@@ -70,10 +70,10 @@ export class QuoteListComponent implements OnInit {
 
   status2str(status: number): string {
     switch (status) {
-      case -1: return 'ELIMINADAS'; break;
-      case 1: return 'DISPONIBLES'; break;
-      case 2: return 'TOMADAS'; break;
-      case 4: return 'ENVIADAS-FINALIZADAS'; break;
+      case -1: return 'ELIMINADA'; break;
+      case 1: return 'DISPONIBLE'; break;
+      case 2: return 'TOMADA'; break;
+      case 4: return 'ENVIADA-FINALIZADA'; break;
     }
     return 'DESCONOCIDO';
   }
@@ -126,7 +126,7 @@ export class QuoteListComponent implements OnInit {
         },
         {
           name: 'consecutive',
-          label: 'Documento:',
+          label: 'Número documento:',
           type: 'text',
           validators: {},
         }
@@ -134,7 +134,7 @@ export class QuoteListComponent implements OnInit {
     }
 
     const ddta: DialogData = {
-      title: 'Seleccionar Estado/Consecutivo',
+      title: 'Filtros',
       dgwidth: 300,
       dgheigth: 315,
       value: { filter: this.filter },

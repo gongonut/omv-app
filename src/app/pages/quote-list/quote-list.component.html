@@ -11,9 +11,14 @@
                     <span class="font-medium">{{quoteW.consecutive}}</span>
                 </div>
 
-                <div class="grow">
+                <div class="w-60">
                     <span>Total: </span>
                     <span class="font-medium">{{quoteW.total | currency}}</span>
+                </div>
+
+                <div class="grow">
+                    <span>Fecha: </span>
+                    <span class="font-medium">{{quoteW.date | date: 'dd/MM/yyyy'}}</span>
                 </div>
 
                 <div class="ml-1 p-1 flex flex-row items-center text-xs text-sky-500 border border-sky-500 rounded-md"

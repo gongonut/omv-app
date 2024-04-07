@@ -10,7 +10,7 @@ export class SharedVarsService {
 
   private logedReady = new BehaviorSubject<boolean>(false);
 
-  readonly DEV_STATUS=true;
+  readonly DEV_STATUS=false;
   readonly OMV_SERVER = this.DEV_STATUS? 'http://localhost:3000/' : `https://${window.location.hostname}/`; // 'https://omv-production.up.railway.app/' // 'https://catalogos.omvpublicidadsas.com/'
   // readonly OMV_SERVER = 'http://localhost:3000/'; 
   user!: User;

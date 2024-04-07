@@ -40,20 +40,14 @@
     
     <hr>
     <h2 class="mt-2">&nbsp;Acción</h2>
-    <button mat-menu-item (click)="onEditState(true)">
+    <button *ngIf="sharedvar.selQuote.status === 2" mat-menu-item (click)="onEditState(true)">
         Editar
         <mat-icon color="primary">edit</mat-icon>
     </button>
-    <button mat-menu-item (click)="onEditState(false)">
+    <button *ngIf="sharedvar.selQuote.status === 2" mat-menu-item (click)="onEditState(false)">
         Vista previa
         <mat-icon color="primary">preview</mat-icon>
     </button>
-    <!--
-    <button mat-menu-item (click)="onReSendEmail()">
-        Reenviar correo
-        <mat-icon color="warn">mail_outline</mat-icon>
-    </button>
--->
     <button mat-menu-item (click)="printAsPdf()">
         <mat-icon color="primary">print</mat-icon>
         Impimir

@@ -100,8 +100,12 @@ export class QuoteDetailComponent implements OnInit {
   }
 
   setSend() {
+    if (this.edit) {
+      return this.snkBar.open(`El documento está en modo edición`, 'Listo', { duration: 10000 })
+      
+    }
     if (!this.editable()) return;
-    return this.snkBar.open(`¿Enviar respuesta al correo: ${this.sharedvar.selQuote.client_email}?`, 'Si', { duration: 3000 })
+    return this.snkBar.open(`¿Enviar respuesta al correo: ${this.sharedvar.selQuote.client_email}?`, 'Si', { duration: 10000 })
       .onAction().subscribe(ok => {
         this.sharedvar.selQuote.htmlQuote = this.getSnapshot();
         this.setQuote(4);
@@ -140,6 +144,7 @@ export class QuoteDetailComponent implements OnInit {
     quote.agent_name = this.sharedvar.user.name;
     quote.agent_phone = this.sharedvar.user.phone;
     quote.agent_city = this.sharedvar.user.city;
+    quote.agent_email = this.sharedvar.user.email;
   }
 
   onEditState(edit: boolean) {

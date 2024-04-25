@@ -63,17 +63,12 @@ export class HttpQuoteService {
     return this.httpq.put<CotizaWish>(`${this.sharedvar.OMV_SERVER}quote/${id}`, quote);
   }
 
+  updateFromMarpico(): Observable<any> {
+    return this.httpq.get<CotizaWish>(`${this.sharedvar.OMV_SERVER}marpico/update/`);
+  }
+
   getCssData(idcss: string) {
-    // const URL = '../assets/quote.txt';
     return this.httpq.get(idcss, {responseType: 'text'});
-    /*
-    subscribe(data => {
-      const dataArray = data as [];
-      if (dataArray.length > 0) {
-        this.mongodb.marpicoItems = dataArray;
-      }
-    })
-    */
   }
 
 }

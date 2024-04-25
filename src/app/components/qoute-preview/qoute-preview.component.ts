@@ -91,11 +91,22 @@ export class QoutePreviewComponent implements OnInit {
     return this.sharedvar.selQuote.condList.findIndex(cdl => cdl === cond_quote.name) > -1;
   }
 
+  getImage(qitem: any): string {
+    
+    if (qitem.materiales[0].imagenes.length > 0 && qitem.materiales[0].imagenes[0].length > 0) return qitem.materiales[0].imagenes[0];
+    return qitem.imagen;
+  
+  }
+
+  /*
+
   getImage(qitem: Item): string {
+    debugger;
     if (qitem.materiales[0].imagenes.length > 0 && qitem.materiales[0].imagenes[0].imagen.file_sm) return qitem.materiales[0].imagenes[0].imagen.file_sm;
     return qitem.imagen.imagen.file_sm;
-    // return qitem.materiales[0].imagenes[0].imagen.file_sm;
+  
   }
+  */
 
   getSubTtlXItem(qitem: Item): number {
     return qitem.itemTag.cantidad * qitem.itemTag.precio;

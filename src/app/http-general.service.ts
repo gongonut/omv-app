@@ -13,7 +13,7 @@ export class HttpGeneralService {
   constructor(private httgen: HttpClient, private sharedvar: SharedVarsService) { }
 
   newGeneral(): General {
-    return {id: 'only', quote_condition: '', consecutive: 0, p_iva: 19} as General;
+    return {id: 'only', quote_condition: '', consecutive: 0, p_iva: 19, catagMARPICO: []} as General;
   }
 
   getGeneral(): Observable<General> {

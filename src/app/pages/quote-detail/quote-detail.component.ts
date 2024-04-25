@@ -221,6 +221,23 @@ export class QuoteDetailComponent implements OnInit {
     return this.viewNote ? 'visibility_off' : 'visibility';
   }
 
+  updateImgDoc() {
+    debugger;
+    let newQuote = { ...this.sharedvar.selQuote } as any;
+    // delete(newQuote.condList.)
+    newQuote.itemList.forEach((il: any) => {
+      if (il.imagen && il.imagen.imagen && il.imagen.imagen.file_md) {il.imagen = il.imagen.imagen.file_md}
+      if (il.materiales && il.materiales[0] && il.materiales[0].imagenes && il.materiales[0].imagenes[0] &&
+        il.materiales[0].imagenes[0].imagen && il.materiales[0].imagenes[0].imagen.file_md) {
+        il.materiales[0].imagenes[0] = il.materiales[0].imagenes[0].imagen.file_md;
+      }
+    })
+    // console.log(this.sharedvar.selQuote);
+    this.sharedvar.selQuote = newQuote;
+    this.setQuote(this.sharedvar.selQuote.status);
+    
+  }
+
   getNoteText() {
     return this.viewNote ? 'Ocultar nota del cliente' : 'Ver nota del cliente';
   }

@@ -37,7 +37,7 @@
         Enviar
         <mat-icon color="warn">send</mat-icon>
     </button>
-    
+
     <hr>
     <h2 class="mt-2">&nbsp;Acción</h2>
     <button *ngIf="sharedvar.selQuote.status === 2" mat-menu-item (click)="onEditState(true)">
@@ -56,4 +56,12 @@
         <mat-icon color="primary">{{getNoteIcon()}}</mat-icon>
         {{getNoteText()}}
     </button>
+    <hr>
+    <button mat-menu-item (click)="updateImgDoc()">
+        <span class="text-red-800">
+            Actualizar documento
+        </span>
+        <mat-icon color="warn">transform</mat-icon>
+    </button>
+
 </mat-menu>

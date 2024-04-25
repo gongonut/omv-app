@@ -4,6 +4,7 @@ import { JsonFormData } from 'src/app/components/dynamic-form/dynamic-form.compo
 import { Condition } from 'src/app/datatypes';
 import { DialogData, DialogService } from 'src/app/dialog.service';
 import { HttpGeneralService } from 'src/app/http-general.service';
+import { HttpQuoteService } from 'src/app/http-quote.service';
 // import { MongoBaseService } from 'src/app/mongo-base.service';
 import { SharedVarsService } from 'src/app/shared-vars.service';
 
@@ -62,9 +63,9 @@ export class QuoteDocComponent implements OnInit {
         type: 'textarea',
         totalRows: 2,
         style: 'w-full',
-        validators: { }
+        validators: {}
       },
-      
+
       /*
       {
         name: 'newUsr',
@@ -80,6 +81,7 @@ export class QuoteDocComponent implements OnInit {
     private dg: DialogService,
     // private mongodb: MongoBaseService,
     private httpGen: HttpGeneralService,
+    private httpq: HttpQuoteService,
     public sharedvar: SharedVarsService,
     private snkBar: MatSnackBar
   ) { }
@@ -90,11 +92,24 @@ export class QuoteDocComponent implements OnInit {
       this.quote_cond_list = JSON.parse(this.sharedvar.general.quote_condition) as Condition[];
   }
 
-  /*
   getClicked(event: any) {
-
     switch (event.index) {
 
+      case 2:
+        // Actualizo desde Marpico
+        this.httpq.updateFromMarpico().subscribe((res: Response) => {
+          console.log('Actualizado con exito');
+          this.snkBar.open('Actualizado con exito', 'Ok', { duration: 6000 });
+
+        });
+        break;
+    }
+  }
+  /*
+  getClicked(event: any) {
+ 
+    switch (event.index) {
+ 
       case 2:
         const cond = this.newCondition('Título');
         this.editAddCondition(cond);
@@ -102,6 +117,73 @@ export class QuoteDocComponent implements OnInit {
     }
   }
   */
+
+  addEditItemMPCO() {
+    // const anew = MPCOitem? false : true;
+    const condData: JsonFormData = {
+      controls: [
+        {
+          name: 'key',
+          label: 'Código MARPICO:',
+          type: 'text',
+          // style: { 'width': '150px' },
+          validators: { required: true }
+        },
+        {
+          name: 'value',
+          label: 'Título:',
+          type: 'text',
+          style: 'w-full',
+          validators: { required: true }
+        }
+      ]
+    }
+
+
+    const MPCOitem = { key: 'CODIGO', value: 'TITULO' }
+
+    // const condName = cond.name || '';
+
+    const ddta: DialogData = {
+      title: 'Código - Título',
+      value: MPCOitem,
+      schema: condData,
+      dgheigth: 315,
+      dgwidth: 600
+    }
+
+    this.dg.aDefault(ddta).subscribe((result: any) => {
+
+      if (result) {
+        // this.dg.updatePropResult(user, result);
+        debugger;
+        delete (result._valid_);
+        delete (result._propName_);
+
+
+        this.sharedvar.general.catagMARPICO.push(result)
+
+
+        this.httpGen.updateGeneral(this.sharedvar.general).subscribe(data => {
+
+          if (data) { }
+        })
+      }
+    });
+  }
+
+  deleteMPCOitem(index: number) {
+    this.snkBar.open(`Eliminar ${this.sharedvar.general.catagMARPICO[index].key}-${this.sharedvar.general.catagMARPICO[index].value}`, 'Continuar', { duration: 3000 })
+      .onAction().subscribe(async ok => {
+        this.sharedvar.general.catagMARPICO.splice(index, 1);
+        this.httpGen.updateGeneral(this.sharedvar.general).subscribe(data => {
+
+          if (data) { }
+        })
+
+      });
+
+  }
 
   addCondition() {
     const cond = this.newCondition('Título');
@@ -183,17 +265,17 @@ export class QuoteDocComponent implements OnInit {
   }
 
   onGetData(result: any) {
-    
+
     result.name = result.name?.toUpperCase() || '';
     this.sharedvar.updatePropResult(this.sharedvar.general, result);
     if (result['_valid_'] === false) {
       this.snkBar.open('Debe proporcionar la información solicitada', 'Ok', { duration: 3000 })
       return;
     }
-    
+
     this.httpGen.updateGeneral(this.sharedvar.general).subscribe(data => {
       if (data) {
-        
+
       }
     })
   }

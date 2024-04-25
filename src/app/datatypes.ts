@@ -198,4 +198,5 @@ export interface General {
     phone?: string; // Teléfono
     address?: string;
     notifMails?: string;
+    catagMARPICO: { key: string, value: string }[];
 }
